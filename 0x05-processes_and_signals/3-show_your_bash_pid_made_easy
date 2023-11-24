@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Processes contain bash
-pgrep -a bash
+pgrep -l bash
 

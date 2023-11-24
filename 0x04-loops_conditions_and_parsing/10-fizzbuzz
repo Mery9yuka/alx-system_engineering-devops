@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# display from 1 to 100
+# if nb is multiple by 3 or 5 display fizzbuz instead
+# if the nb is multiple of 3 display fizz
+# if the nb is pultiple of 5
+# otherwise display the number
+
+
+for f in {1..100}
+do
+    if (( f % 3 == 0 && f % 5 == 0 ))
+    then
+        echo "FizzBuzz"
+    elif (( f % 3 == 0 ))
+    then
+        echo "Fizz"
+    elif (( f % 5 == 0 ))
+    then
+        echo "Buzz"
+    else
+        echo "$f"
+    fi
+done
+

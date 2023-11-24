@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# print best school 10 times and  Hi in the 9th
+
+
+u=0
+while [ $u -lt 10 ]
+do
+    if [ $u -eq 9 ]
+    then
+        echo "Hi"
+    fi
+    echo "Best School"
+    ((u++))
+done
+

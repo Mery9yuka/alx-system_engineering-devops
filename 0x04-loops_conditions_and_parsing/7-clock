@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# diplay time for 12h59min hours and minutes
+
+
+s=0
+while [ $s -le 12 ]
+do
+    echo "Hour: $s"
+    d=1
+    while [ $d -le 59 ]
+    do
+        echo "$d"
+        (( d++ ))
+    done
+    (( s++ ))
+done
+

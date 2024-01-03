@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# script displaying IPv4 adresses only the
+#  command grep search for the line containing 'inet'
+# after that the command awk print the 
+# second field of each line of inet which is the IPv4 addresses.
+#
+# we can use this as well:
+# ip -4 addr show | grep inet | awk '{print $2}' | cut -d'/' -f1
+
+ifconfig | grep "inet " | awk '{print $2}'

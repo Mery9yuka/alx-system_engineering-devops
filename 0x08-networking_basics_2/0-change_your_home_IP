@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# change or modify the  entry to the file /etc/hosts
+# by using "cp" to copy  the file /etc/hosts to a new one where we will 
+# + add entries, replacing localhost with a new IP address which is: 127.0.0.2
+# + modify entry to facebook.com with the IP address: 8.8.8.8
+# finally we copy the modifications issued in the
+#  new file to the original one using cp -f.
+
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.2     localhost" > ~/hosts.new
+echo "8.8.8.8       facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts

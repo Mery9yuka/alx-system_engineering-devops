@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# it  is a script displaying the listening ports
+# this --program shows the PID and the name
+# of program that each socket belongs to
+# --listening it's an option that displays only listening sockets
+# we can use also -l before --program also, which is an alias to --listening
+
+netstat --program --listening

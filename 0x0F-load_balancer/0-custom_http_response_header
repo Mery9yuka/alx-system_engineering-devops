@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script that configures Nginx
+apt-get -y update
+apt-get -y install nginx

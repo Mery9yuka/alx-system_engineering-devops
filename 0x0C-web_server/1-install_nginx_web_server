@@ -2,8 +2,8 @@
 # script that installs nginx, configure a new Ubuntu machine
 # and then print "Hello World"
 
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 echo 'Hello World!' | sudo tee /var/www/html/index.html
-service nginx start
+sudo service nginx start

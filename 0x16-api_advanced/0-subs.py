@@ -10,10 +10,16 @@ def number_of_subscribers(subreddit):
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {'User-Agent': 'Custom User Agent'}
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
         data = response.json()
         return data['data']['subscribers']
-    else:
-        return 0
+    except requests.exceptions.HTTPError as e:
+        if response.status_code == 404:
+            print("Subreddit not found.")
+        else:
+            print(f"Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
+    return 0

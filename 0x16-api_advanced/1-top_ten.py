@@ -5,7 +5,7 @@ Function that queries the Reddit API
 """
 
 import requests
-
+import sys
 
 def top_ten(subreddit):
     """

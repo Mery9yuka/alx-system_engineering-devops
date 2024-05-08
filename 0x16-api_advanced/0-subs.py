@@ -5,8 +5,8 @@ import requests
 
 def number_of_subscribers(subreddit):
     """Return the nb of subscribers for a given subreddit
-       returns the number of subscribers for a given subreddit. 
-       If an invalid subreddit is given, the function should return 0.    
+       returns the number of subscribers for a given subreddit.
+       If an invalid subreddit is given, the function should return 0
     """
     Url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {

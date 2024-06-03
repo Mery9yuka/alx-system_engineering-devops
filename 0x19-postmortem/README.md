@@ -1,32 +1,51 @@
-The Issue Summary:
-Duration of the outage: Occurred on May 12, 2024, from 3:00 PM to 6:30 PM (GMT).
+Issue:
+Duration of Outage:
 
-Impact: The outage affected the availability of our e-commerce platform, resulting in a 30% decrease in user traffic and a loss of potential revenue.
+Start Time: June 1, 2024, 09:00 AM (UTC)
+End Time: June 1, 2024, 11:30 AM (UTC)
+Impact:
 
-The Root Cause: The outage was caused by a misconfiguration in the load balancer settings.
+Service Affected: User Authentication Service
+User Experience: Users were unable to log in or register on our platform.
+Percentage of Users Affected: 100%
+Root Cause:
 
-Timeline:
-3:00 PM: The issue was detected by monitoring alerts indicating a sudden drop in server response times.
-3:10 PM: Engineers began investigating the issue, initially suspecting a database overload.
-3:45 PM: Further investigation revealed that the load balancer was not distributing traffic evenly due to misconfigured routing rules.
-4:00 PM: The incident was escalated to the DevOps team for assistance.
-6:30 PM: The misconfiguration was corrected, restoring normal traffic flow.
+A misconfiguration in the authentication microservice deployment caused the service to crash under high load, leading to a complete outage.
+Timeline
+09:00 AM: Issue detected via monitoring alert indicating high error rates in the authentication service.
+09:05 AM: Incident escalated to the on-call engineer.
+09:10 AM: On-call engineer began investigating the authentication service logs.
+09:20 AM: Initial assumption was a bug in the recent deployment; rollback initiated.
+09:40 AM: Rollback completed, but the issue persisted.
+09:50 AM: Further investigation revealed configuration errors in the deployment settings.
+10:00 AM: Misleading path: checked database for possible issues with user data, no issues found.
+10:30 AM: Escalated to the DevOps team to review deployment configurations.
+11:00 AM: DevOps team identified and corrected the configuration errors.
+11:15 AM: Redeployment initiated with correct settings.
+11:30 AM: Service restored, users able to log in and register again.
+Root Cause and Resolution
 
-Root Cause and Resolution:
-The issue originated from a recent adjustment we made to the load balancer configuration. Unfortunately, this tweak caused an imbalance in traffic distribution across our servers, resulting in performance issues for our users. To address this, we reverted the load balancer settings to their previous state and implemented automated tests to validate configurations before deployment, ensuring smoother operations moving forward.
+Root Cause:
+The root cause was a misconfiguration in the deployment settings of the authentication microservice. The configuration did not properly handle high load scenarios, causing the service to crash when the number of concurrent login attempts spiked.
 
-Corrective and Preventative Measures:
+Resolution:
+The issue was resolved by: Me( Maryem )
 
+Identifying the incorrect settings in the deployment configuration.
+Correcting the settings to ensure the service could handle high loads.
+Redeploying the authentication service with the updated configuration.
+Corrective and Preventative Measures
 Improvements/Fixes:
-Regular audits of load balancer configurations to identify and correct any discrepancies.
-Implementation of automated testing for load balancer configurations as part of the deployment pipeline.
 
+Deployment Configuration Review: Implement a more thorough review process for deployment configurations to catch potential issues before they go live.
+Load Testing: Introduce regular load testing for all critical services to ensure they can handle high traffic scenarios.
+Monitoring Enhancements: Enhance monitoring to include more detailed metrics and alerts specifically for configuration issues.
 Tasks to Address the Issue:
-Conduct a thorough review of load balancer configurations to identify any additional misconfigurations.
 
-Update documentation and procedures for load balancer configuration management to prevent similar issues in the future.
+ Conduct a full review of the authentication service deployment process.
+ Implement automated configuration validation checks.
+ Schedule regular load testing for the authentication service.
+ Update monitoring systems to include alerts for configuration discrepancies.
+ Train the engineering team on best practices for deployment configurations.
 
-Schedule regular training sessions for DevOps teams to ensure awareness of best practices for load balancer management.
-
-By implementing these measures, we aim to minimize the risk of future outages caused by misconfigured load balancers and maintain the reliability and availability of our e-commerce platform.
- 
+By addressing these areas, we can minimize the risk of similar outages in the future and improve the overall reliability of our services.

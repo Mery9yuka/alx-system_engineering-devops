@@ -5,47 +5,49 @@
 import requests
 
 
-def count_words(subreddit, word_list, instances={}, after="", count=0):
-    """Prints a sorted count of given keywords found
+def count_words(subreddit, word_list, counts=None, after="", count=0):
+    """Function that prints a sorted count of given keywords found
        in hot articles of a given subreddit.
     """
-    url_api = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    if counts is None:
+        counts = {word.lower(): 0 for word in word_list}
+
+    url_api = f"https://www.reddit.com/r/{subreddit}/hot/.json"
     headers = {
         "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/meryuka20)"
     }
     req_params = {
-        "after": after_id,
-        "count": count_key,
+        "after": after,
         "limit": 100
     }
-    response = requests.get(url_api, headers=headers, params=req_params,
-                            allow_redirects=False)
+
     try:
-        results = response.json()
-        if response.status_code == 404:
-            raise Exception
-    except Exception:
-        print("")
+        response = requests.get(
+            url_api, headers=headers, params=req_params, timeout=10
+            )
+        response.raise_for_status()
+        results = response.json().get("data")
+    except requests.RequestException as e:
+        print(f"Error fetching data from Reddit API: {e}")
         return
 
-    results = results.get("data")
     after_id = results.get("after")
-    count_key += results.get("dist")
+    count += results.get("dist")
+
     for i in results.get("children"):
         title = i.get("data").get("title").lower().split()
         for w in word_list:
             if w.lower() in title:
                 time = len([t for t in title if t == w.lower()])
-                if instances.get(w) is None:
-                    instances[w] = time
-                else:
-                    instances[w] += time
+                counts[w.lower()] += time  # Use lowercase key to access counts
 
     if after_id is None:
-        if len(instances) == 0:
+        if len(counts) == 0:
             print("")
             return
-        instances = sorted(instances.items(), key=lambda kv: (-kv[1], kv[0]))
-        [print("{}: {}".format(k, v)) for k, v in instances]
+        sorted_counts = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+        for word, count in sorted_counts:
+            if count > 0:
+                print(f"{word}: {count}")
     else:
-        count_words(subreddit, word_list, instances, after, count)
+        count_words(subreddit, word_list, counts, after_id, count)

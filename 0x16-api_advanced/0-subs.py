@@ -9,18 +9,16 @@ def number_of_subscribers(subreddit):
        If an invalid subreddit is given, the function should return 0
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'Custom User Agent'}
+    headers = {
+        'User-Agent': 'python:subscribers:v1.0 (by /u/meryuka20@gmail.com)'
+        }
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
-            data = response.json()
-            return data['data']['subscribers']
-        elif response.status_code == 404:
-            print("Subreddit not found.")
-        else:
-            print(f"Error: {response.status_code}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
+            data_u = response.json()
+            return data_u['data']['subscribers']
+    except requests.exceptions.RequestException:
+        pass
 
     return 0

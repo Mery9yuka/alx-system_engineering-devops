@@ -11,4 +11,3 @@ sed -i "/listen \[::\]:80 default_server;/ a \    add_header X-Served-By \"$host
 service nginx restart
 
 echo "Nginx configured with custom header X-Served-By: $hostname"
-

@@ -20,5 +20,4 @@ echo "
    server 17272-web-02 54.236.12.23:80 check
 " >> /etc/haproxy/haproxy.cfg
 
-
 service haproxy start
